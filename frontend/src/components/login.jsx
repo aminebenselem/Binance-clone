@@ -1,20 +1,22 @@
-
 import logo from '../assets/logo.png';
 import { SocialButton } from './Button';
-import { FaGoogle, FaTelegramPlane, FaApple,FaKey } from 'react-icons/fa';
+import { FaGoogle, FaTelegramPlane, FaApple, FaKey } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 export function Login() {
-  return (<>
-    <div id="login" className="bg-[#181a20] min-h-screen flex items-center justify-center mt-4">
-      <div className="rounded-xl bg-[#181a20] border-2 border-[#2f323b] w-11/12 md:w-1/3 lg:w-1/4 p-6 pb-0">
+  return (
+    <div id="login" className="bg-[#181a20] min-h-screen flex flex-col items-center justify-center p-4">
+      <div className="rounded-xl bg-[#181a20] border-2 border-[#2f323b] w-full max-w-sm p-6">
         <div className="flex flex-col items-center space-y-6">
-          <img src={logo} alt="logo" className="w-1/2 mr-auto" />
-          <h1 className="font-bold text-2xl text-white text-center mr-auto">Log in</h1>
+          <img src={logo} alt="logo" className="w-1/2" />
+          <h1 className="font-bold text-2xl text-white text-center">Log in</h1>
 
           <form className="w-full">
             <div className="relative w-full">
-              <label htmlFor="email" className="text-white text-sm absolute top-[-12px] left-2 bg-[#181a20] px-1">
+              <label
+                htmlFor="email"
+                className="text-white text-sm absolute top-[-12px] left-2 bg-[#181a20] px-1"
+              >
                 Email / Phone number
               </label>
               <input
@@ -25,27 +27,34 @@ export function Login() {
                 placeholder="Email / phone (without country code)"
               />
             </div>
-             
-                <button type='submit' className='bg-yellow-400 hover:bg-yellow-500 cursor-pointer rounded-md w-full h-10 mt-4'>Next</button>
-                <div className="flex items-center my-6">
-  <div className="flex-grow border-t border-gray-600"></div>
-  <span className="mx-4 text-gray-400 text-sm">or</span>
-  <div className="flex-grow border-t border-gray-600"></div>
-</div>
 
-<SocialButton label="Continue with Passkey"  icon={<FaKey />} />     
-<SocialButton label="Continue with Gmail"  icon={<FaGoogle />} />     
-<SocialButton label="Continue with Apple"  icon={<FaApple />} />     
-<SocialButton label="Continue with Telegram"  icon={<FaTelegramPlane />} />     
-      </form>
+            <button
+              type="submit"
+              className="bg-yellow-400 hover:bg-yellow-500 cursor-pointer rounded-md w-full h-10 mt-4"
+            >
+              Next
+            </button>
+
+            <div className="flex items-center my-6">
+              <div className="flex-grow border-t border-gray-600"></div>
+              <span className="mx-4 text-gray-400 text-sm">or</span>
+              <div className="flex-grow border-t border-gray-600"></div>
+            </div>
+
+            <SocialButton label="Continue with Passkey" icon={<FaKey />} />
+            <SocialButton label="Continue with Gmail" icon={<FaGoogle />} />
+            <SocialButton label="Continue with Apple" icon={<FaApple />} />
+            <SocialButton label="Continue with Telegram" icon={<FaTelegramPlane />} />
+          </form>
+
+         
         </div>
       </div>
+       <div className="mt-4">
+            <Link to="/signup" className="text-yellow-300 hover:text-yellow-400">
+              Create a Binance account
+            </Link>
+          </div>
     </div>
-    <div className="mt-4 flex justify-center">
-    <Link to="/signup" className="text-yellow-300 hover:text-yellow-400">
-      Create a Binance account
-    </Link>
-    </div>
-    </>
   );
 }

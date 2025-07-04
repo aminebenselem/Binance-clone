@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 export function SignUp() {
   return (<>
-    <div id="login" className="bg-[#181a20] min-h-screen flex items-center justify-center">
+    <div id="login" className="bg-[#181a20] min-h-screen flex flex-col items-center justify-center">
       <div className="rounded-xl bg-[#181a20] border-2 border-[#2f323b] w-11/12 md:w-1/3 lg:w-1/4 md:mt-10  p-6 mb-4">
         <div className="flex flex-col items-center space-y-6">
           <img src={logo} alt="logo" className="w-1/2 mr-auto" />
@@ -44,13 +44,13 @@ export function SignUp() {
       </form>
         </div>
       </div>
- 
-    </div>
-       <div className="mt-4 flex justify-center">
+  <div className="mt-4 flex justify-center mb-10">
     <Link to="/login" className="text-yellow-300 hover:text-yellow-400">
      Login to your account
     </Link>
   </div> 
+    </div>
+      
     </>
   );
 }

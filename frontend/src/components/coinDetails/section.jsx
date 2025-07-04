@@ -14,7 +14,6 @@ useEffect(() => {
       const res = await fetch(`https://api.coingecko.com/api/v3/coins/${name}`);
       if (!res.ok) throw new Error(`error ${res.status}`);
       const data = await res.json();
-      console.log(data);
       
       setDetails(data);
     } catch (err) {

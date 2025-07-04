@@ -1,18 +1,19 @@
 import { useState } from "react";
 import { FaSearch, FaMoon, FaSun, FaBars, FaTimes } from "react-icons/fa";
+
 import logo from '../assets/logo.png'
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header className="fixed top-0 w-full bg-[#181a20] h-24 px-6 flex items-center justify-between z-50">
-      <img src={logo} alt="Logo" className="w-36 sm:w-40 mr-4 sm:mr-20" />
+   <a  href="/home"><img src={logo}  alt="Logo" className="w-36 sm:w-40 mr-4 sm:mr-20" /></a>   
 
       <nav className="hidden md:flex items-center space-x-6 mr-auto">
         {["Buy Crypto", "Markets", "Trade", "Derivatives"].map((item) => (
           <a
             key={item}
-            href="#"
+            href="/market"
             className="text-white hover:text-yellow-400 cursor-pointer whitespace-nowrap"
           >
             {item}
@@ -48,11 +49,11 @@ export function Header() {
           <FaSearch size={18} />
         </button>
 
-        <button className="hidden sm:block bg-[#2f323b] rounded-md hover:bg-gray-700 px-4 py-2 text-white cursor-pointer">
+        <button onClick={()=>window.location.href='/login'} className="hidden sm:block bg-[#2f323b] rounded-md hover:bg-gray-700 px-4 py-2 text-white cursor-pointer">
           Log In
         </button>
 
-        <button className="hidden sm:block bg-yellow-400 rounded-md hover:bg-yellow-500 px-4 py-2 text-black cursor-pointer">
+        <button onClick={()=>window.location.href='/signup'} className="hidden sm:block bg-yellow-400 rounded-md hover:bg-yellow-500 px-4 py-2 text-black cursor-pointer">
           Sign Up
         </button>
 

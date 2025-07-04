@@ -1,41 +1,34 @@
-import React, { useState ,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import { AiOutlineInfoCircle } from "react-icons/ai";
 
 export function CoinsList() {
   const [page, setPage] = useState(1);
-useEffect(()=>{
-const url=`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=30&page=${page}&sparkline=false`
+  const [coins,setCoins] =useState([])
+  const rowsPerPage = 10;
 
-}
+  useEffect(() => {
+    const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${rowsPerPage}&page=${page}&sparkline=false`;
+   const fetchByPage =async ()=>{
+    const res = await fetch(url)
+    if(!res.ok) throw Error(`error ${res.status}`);
+    
+    const data = await res.json()
+    setCoins(data)
+   }
 
+fetchByPage()
 
-,[page])
+  }, [page]);
 
-  const rowsPerPage = 1;
+  
 
-  // Hardcoded table data directly in the render logic
-  const hardcodedData = [
-    {
-      name: 'BTC',
-      fullName: 'Bitcoin',
-      price: 109320,
-      change: '+0.61%',
-      volume: '$49.23B',
-      marketCap: '$2.17T',
-    },
-    {
-      name: 'ETH',
-      fullName: 'Ethereum',
-      price: 2586.5,
-      change: '+0.83%',
-      volume: '$19.72B',
-      marketCap: '$312.71B',
-    },
-    // You can add more entries here
-  ];
-
-  const totalPages = Math.ceil(hardcodedData.length / rowsPerPage);
-  const paginatedData = hardcodedData.slice((page - 1) * rowsPerPage, page * rowsPerPage);
-
+const formatCompact = (value) =>
+  new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    notation: 'compact',
+    maximumFractionDigits: 2,
+  }).format(value);
   return (
     <div className="p-6 bg-[#181a20] text-white min-h-screen mt-20 flex flex-col items-center overflow-x-auto">
       <table className="w-full md:w-10/12 text-left border-collapse rounded overflow-hidden">
@@ -45,47 +38,49 @@ const url=`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=
             <th className="py-3 px-4">Price</th>
             <th className="py-3 px-4">Change</th>
             <th className="py-3 px-4">24h Volume</th>
-            <th className="py-3 px-4">Market Cap</th>
+            <th className="py-3 px-4">Market Cap Rank</th>
             <th className="py-3 px-4">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {paginatedData.map((item, index) => (
-            <tr key={index} className="border-b border-gray-700 hover:bg-gray-800 transition duration-200">
-              <td className="py-3 px-4 flex items-center space-x-2">
-                <span className="font-bold text-orange-400">{item.name}</span>
-                <span className="text-gray-400">{item.fullName}</span>
-              </td>
-              <td className="py-3 px-4">${item.price.toLocaleString()}</td>
-              <td className={`py-3 px-4 ${item.change.startsWith('+') ? 'text-green-400' : 'text-red-400'}`}>
-                {item.change}
-              </td>
-              <td className="py-3 px-4">{item.volume}</td>
-              <td className="py-3 px-4">{item.marketCap}</td>
-              <td className="py-3 px-4 flex gap-2">
-                <button className="hover:text-blue-400 transition">🔍</button>
-                <button className="hover:text-yellow-400 transition">⚙️</button>
-              </td>
-            </tr>
-          ))}
+          {coins.map((coin,index)=>{
+           return  (
+
+               <tr onClick={()=>window.location.href=`/price/${coin.id}`} key={index} className="border-b border-gray-700 hover:bg-gray-800 transition duration-200">
+            <td className="py-3 px-4 flex items-center space-x-2">
+             <img src={coin.image} className='w-6' />
+              <span className="font-bold text-orange-400 uppercase">{coin.symbol}</span>
+              <span className="text-gray-400">{coin.name}</span>
+            </td>
+            <td className="py-3 px-4">${coin.current_price.toLocaleString()}</td>
+            <td  className={`py-3 px-4 ${coin.price_change_percentage_24h >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+              {coin.price_change_percentage_24h>=0 ? '+' :''}{coin.price_change_percentage_24h?.toFixed(2)}%
+             </td>
+            <td className="py-3 px-4">{formatCompact(coin.total_volume)}</td>
+            <td className="py-3 px-4">{coin.market_cap_rank}</td>
+            <td className="py-3 px-4 flex gap-2 justify-center">
+              <button className="hover:text-blue-400 transition"><AiOutlineInfoCircle className="text-gray-500 hover:text-white cursor-pointer" /></button>
+            </td>
+          </tr>
+            )
+          })}
+         
         </tbody>
       </table>
 
-      {/* Pagination Controls */}
       <div className="flex justify-center items-center mt-6 gap-4">
         <button
-          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+          onClick={() => setPage((prev) => prev - 1)}
           disabled={page === 1}
           className="px-3 py-1 bg-gray-700 text-white rounded disabled:opacity-40"
         >
           Prev
         </button>
         <span className="text-sm text-gray-300">
-          Page {page} of {totalPages}
+          Page {page} 
         </span>
         <button
-          onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
-          disabled={page === totalPages}
+          onClick={() => setPage((prev) => prev + 1)}
           className="px-3 py-1 bg-gray-700 text-white rounded disabled:opacity-40"
         >
           Next
