@@ -6,7 +6,6 @@ export function Content() {
   const [coins, setCoins] = useState([]);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('popular');
-
   useEffect(() => {
     const url = 'https://api.coingecko.com/api/v3/coins/markets' +
       '?vs_currency=usd&order=market_cap_desc&per_page=5&page=1&sparkline=false';
@@ -21,7 +20,6 @@ export function Content() {
   }, []);
   return (<div id="content" className="min-h-screen bg-[#181a20] flex items-center justify-center px-4 md:px-10">
   <div className="flex flex-col lg:flex-row w-full max-w-7xl gap-6 items-start mt-20">
-    {/* Left Section */}
     <div className="w-full lg:w-2/3 px-2 md:px-5">
       <p className="text-white font-bold text-4xl md:text-6xl lg:text-7xl leading-tight">
         <span className="text-yellow-400">200,000,000</span>
@@ -40,9 +38,7 @@ export function Content() {
       </div>
     </div>
 
-    {/* Right Section */}
     <div className="w-full lg:w-1/3 flex flex-col gap-6">
-      {/* Coin List */}
       <div className="bg-[#2f323b] rounded-2xl p-5 text-white">
         <div className="flex space-x-6 mb-2 overflow-x-auto">
           {['popular', 'new', 'top'].map((tab) => (

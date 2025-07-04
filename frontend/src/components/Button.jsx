@@ -5,3 +5,4 @@ export function SocialButton({label ,icon}){
        {icon} <span>{label}</span> 
         </button>);
 }
+
