@@ -72,16 +72,16 @@ const formatCompact = (value) =>
         <button
           onClick={() => setPage((prev) => prev - 1)}
           disabled={page === 1}
-          className="px-3 py-1 bg-gray-700 text-white rounded disabled:opacity-40"
+          className={`px-3 py-1 ${page===1 ? '' : ' cursor-pointer'} bg-gray-700 text-white rounded disabled:opacity-40`}
         >
           Prev
         </button>
-        <span className="text-sm text-gray-300">
+        <span className="text-sm text-gray-300 ">
           Page {page} 
         </span>
         <button
           onClick={() => setPage((prev) => prev + 1)}
-          className="px-3 py-1 bg-gray-700 text-white rounded disabled:opacity-40"
+          className="px-3 py-1 bg-gray-700 text-white rounded disabled:opacity-40 cursor-pointer"
         >
           Next
         </button>

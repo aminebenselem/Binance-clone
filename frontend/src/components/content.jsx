@@ -1,5 +1,6 @@
 import {  useEffect } from "react";
 import { useState } from "react";
+
 export function Content() {
 
 
@@ -8,6 +9,7 @@ export function Content() {
   const [activeTab, setActiveTab] = useState('popular');
   const [order,setOrder]=useState('desc')
   const [page,setPage]=useState(1)
+  
   useEffect(() => {
     const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_${order}&per_page=5&page=${page}&sparkline=false`;
 
@@ -48,10 +50,10 @@ export function Content() {
             <button
               key={tab}
               onClick={() => {setActiveTab(tab);   
-                 if (tab==='new') {setOrder('asc');setPage(2000)} 
+                 if (tab==='new') {setOrder('asc');setPage(100)} 
                  if (tab==='popular') {setOrder('desc');setPage(1)}}}
-              className={`pb-2 whitespace-nowrap font-semibold ${
-                activeTab === tab ? 'border-b-4 border-yellow-400 text-yellow-400' : 'text-white'
+              className={`pb-2 whitespace-nowrap font-semibold cursor-pointer hover:text-gray-300 ${
+                activeTab === tab ? 'border-b-4 border-yellow-400' : 'text-white'
               }`}
             >
               {tab === 'popular' ? 'Popular' : tab === 'new' ? 'New Listing' : 'Top Coins'}

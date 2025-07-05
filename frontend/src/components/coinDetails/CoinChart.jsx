@@ -14,7 +14,6 @@ export function CoinChart({ coinId = 'bitcoin' }) {
   const [days,setDays] = useState(7)
   const [activeTab,setActiveTab] = useState("7D")
   useEffect(() => {
-    console.log(days);
     
     fetch(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${days}`)
       .then(res => res.json())

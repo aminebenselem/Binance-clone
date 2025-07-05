@@ -38,7 +38,7 @@ return(
   <div className="flex flex-col items-center space-y-2">
     <img
       src={details.image?.large}
-      alt="Bitcoin Logo"
+      alt={`${details.name} Logo`}
       className="w-24 h-24"
     />
     <h1 className="text-4xl font-bold">{details.name}</h1>

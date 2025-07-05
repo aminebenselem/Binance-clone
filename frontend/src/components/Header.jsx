@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { FaSearch, FaMoon, FaSun, FaBars, FaTimes } from "react-icons/fa";
-
+import { SearchCard } from "./searchCard";
 import logo from '../assets/logo.png'
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [show, setShow] = useState(false); // Toggle modal
 
   return (
     <header className="fixed top-0 w-full bg-[#181a20] h-24 px-6 flex items-center justify-between z-50">
@@ -45,7 +46,7 @@ export function Header() {
       )}
 
       <div className="flex items-center space-x-4">
-        <button id="searchicon" className="text-white hover:text-yellow-400 cursor-pointer">
+        <button onClick={()=>setShow(!show)} id="searchicon" className="text-white hover:text-yellow-400 cursor-pointer">
           <FaSearch size={18} />
         </button>
 
@@ -64,6 +65,7 @@ export function Header() {
           <FaSun size={18} />
         </button>
       </div>
+<SearchCard setShow={setShow}  show={show}/>
     </header>
   );
 }
