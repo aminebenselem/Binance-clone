@@ -5,7 +5,6 @@ export function SearchCard({ show, setShow }) {
   const [coins, setCoins] = useState([]);
   const [error, setError] = useState(null);
 
-  // 🔥 Load hot coins initially
   useEffect(() => {
     const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=5&page=1&sparkline=false`;
 
@@ -18,13 +17,11 @@ export function SearchCard({ show, setShow }) {
       .catch(err => setError(err.message));
   }, []);
 
-  // 🔍 Handle search query (debounced optional)
   const handleChange = async (e) => {
     const value = e.target.value;
     setQuery(value);
 
     if (value.trim() === '') {
-      // Reload hot coins if search is cleared
       const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=5&page=1&sparkline=false`;
       const res = await fetch(url);
       const data = await res.json();

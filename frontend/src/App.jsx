@@ -1,13 +1,13 @@
-import { useState } from 'react'
-import { SignUp } from './components/signup'
+import { SignUp } from './components/auth/signup'
 import './App.css'
-import { Login } from './components/login'
+import { Login } from './components/auth/login'
 import { BrowserRouter as Router, Routes, Route,Navigate } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { CoinDetails } from './pages/CoinDetails';
 import { Market } from './pages/Market';
+import { Verify } from './components/auth/verify';
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
    <Router>
@@ -16,7 +16,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/Market" element={<Market />} />
-        <Route path="/price/:name" element={<CoinDetails />} />
+        <Route path="/Market" element={<Market />} />
+        <Route path="/verify" element={<Verify />} />
         <Route path="/signup" element={<SignUp />} />
       </Routes>
     </Router>

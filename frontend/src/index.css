@@ -6,4 +6,5 @@ html, body {
   padding: 0;
   height: 100%;
   overflow-x: hidden;
+  @apply dark:dark:bg-[#181a20]
 }
