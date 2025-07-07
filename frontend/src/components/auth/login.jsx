@@ -27,6 +27,11 @@ const onSubmit = async (e) => {
       alert(error.message || 'login failed.');
       return;
     }
+const result = await res.json();   
+console.log(result);
+localStorage.setItem('token',result.access_token)
+localStorage.setItem('id',result.id)
+localStorage.setItem('username',result.username)
 
     window.location.href='/home'
   } catch (error) {
